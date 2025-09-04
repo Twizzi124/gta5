@@ -1,177 +1,166 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GTA 5 RP - Бонуспоинты</title>
-<style>
-body { font-family: Arial, sans-serif; background:#1c1c1c; color:#f0f0f0; padding:20px; }
-h1 { text-align:center; color:#ffcc00; margin-bottom:20px; }
-#vipToggle { display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
-#vipToggle label { margin-left:10px; font-size:1.2em; color:#00ccff; }
-#resetCheckboxes { padding:10px 20px; font-size:1em; cursor:pointer; display:block; margin:0 auto 20px auto; }
-.category { font-weight:bold; font-size:1.2em; margin-top:20px; color:#ff6600; text-align:center; }
-table { width:100%; border-collapse: collapse; margin-bottom:20px; table-layout: fixed; }
-th, td { border:1px solid #555; padding:10px; text-align:center; word-wrap: break-word; }
-th { background-color:#333; }
-tr:nth-child(even) { background-color:#2a2a2a; }
-input[type="checkbox"] { transform: scale(1.5); }
-input[type="number"] { width:50px; padding:5px; font-size:1em; text-align:center; background:#333; color:#fff; border:1px solid #555; border-radius:4px; }
-tr.checked { background-color: #006400 !important; } /* зелёная подсветка */
-#totalBPContainer { font-size:1.5em; text-align:center; margin-top:20px; color:#00ff00; }
-</style>
+  <meta charset="UTF-8">
+  <title>GTA 5 RP — Бонуспоинты</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #1e1e1e; color: #fff; text-align: center; }
+    h1 { margin: 20px 0; }
+    .controls { margin: 20px; }
+    table { 
+      width: 900px; /* фиксированная ширина */
+      margin: 20px auto; 
+      border-collapse: collapse; 
+      background: #2b2b2b; 
+      border-radius: 10px; 
+      overflow: hidden; 
+    }
+    th, td { padding: 10px; border: 1px solid #444; }
+    th { background: #333; }
+    tr.checked { background: #2e7d32 !important; color: #fff; }
+    input[type="number"] { width: 50px; text-align: center; }
+    .reset-btn { margin-top: 20px; padding: 10px 20px; background: #c62828; border: none; color: white; cursor: pointer; border-radius: 5px; }
+    .reset-btn:hover { background: #e53935; }
+    h2 { margin-top: 40px; }
+  </style>
 </head>
 <body>
+  <h1>GTA 5 RP — Бонуспоинты</h1>
 
-<h1>GTA 5 RP - Бонуспоинты</h1>
+  <div class="controls">
+    <label>VIP <input type="checkbox" id="vip"></label>
+    <br><br>
+    <label>Общее количество BP: <input type="number" id="totalBP" value="0"></label>
+    <br><br>
+    <button class="reset-btn" id="reset">Отменить всё</button>
+  </div>
 
-<div id="vipToggle">
-  <input type="checkbox" id="vipCheckbox">
-  <label for="vipCheckbox">VIP x2 BP</label>
-</div>
+  <!-- Таблицы -->
+  <h2>Одиночные</h2>
+  <table id="single">
+    <thead><tr><th>Задание</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Арендовать Киностудию (с VIP скидка)</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Успешная тренировка в тире</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Выиграть в казино (0 или 00)</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Провести 3 часа в игре</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>20 подходов в спортзале</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Купить лотерейный билет</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Добавить 5 видео в кинотеатр</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<button id="resetCheckboxes">Отменить всё</button>
+  <h2>Работа</h2>
+  <table id="work">
+    <thead><tr><th>Задание</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>25 действий в порту</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>25 действий на стройке</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>25 действий в шахте</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Потушить 25 огоньков (пожарный)</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>10 посылок на почте</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>10 действий на ферме</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>2 рейса на автобусе</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<!-- Таблицы с бонуспоинтами -->
+  <h2>Парные</h2>
+  <table id="pair">
+    <thead><tr><th>Задание</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Выиграть гонку на картинге</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Проехать уличную гонку</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Победить 3 раза в Dance Battle</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Выиграть 3 игры на Арене Maze Bank</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Выиграть 5 игр в ТК со ставкой</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<div class="category">Одиночные</div>
-<table id="solo">
-  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
-  <tbody>
-    <tr><td>Арендовать Киностудию (с VIP скидкой)</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выполнить 1 успешную тренировку в тире</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выиграть в казино, поставив на 0 или 00</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Провести 3 часа в игре</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выполнить 20 подходов на тренажёре</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Купить 1 лотерейный билет через телефон</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Добавить 5 видео в Кинотеатр</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-  </tbody>
-</table>
+  <h2>Crime</h2>
+  <table id="crime">
+    <thead><tr><th>Задание</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Привезти Хаммер с ВЗХ</td><td><input type="number" value="3"></td><td><input type="checkbox"></td></tr>
+      <tr><td>5 доставок контрабанды</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Взломать 15 замков</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Закрасить 7 граффити</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<div class="category">Работа</div>
-<table id="work">
-  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
-  <tbody>
-    <tr><td>Выполнить 25 действий в порту</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выполнить 25 действий на стройке</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выполнить 25 действий на шахте</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Потушить 25 огоньков, работая пожарным</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Доставить 10 посылок, работая почтальоном</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выполнить 10 действий на ферме</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выполнить 2 рейса на любом маршруте, работая водителем автобуса</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-  </tbody>
-</table>
+  <h2>Гос</h2>
+  <table id="gov">
+    <thead><tr><th>Задание</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Выдать 5 медкарт (EMS)</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Закрыть 15 вызовов (EMS)</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Арест в КПЗ</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Поставить 2 авто на учёт</td><td><input type="number" value="1"></td><td><input type="checkbox"></td></tr>
+      <tr><td>Закрыть 5 вызовов (гос)</td><td><input type="number" value="2"></td><td><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<div class="category">Парные</div>
-<table id="pair">
-  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
-  <tbody>
-    <tr><td>Выиграть 1 гонку на картинге</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Проехать 1 уличную гонку</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Победить 3 раза в Dance Battle</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выиграть 3 игры на Арене Maze Bank со ставкой от 100$</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выиграть 5 игр в ТК со ставкой от 100$</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-  </tbody>
-</table>
+  <script>
+    const totalBPInput = document.getElementById('totalBP');
+    const vipCheckbox = document.getElementById('vip');
+    const tables = document.querySelectorAll('table');
+    const resetBtn = document.getElementById('reset');
 
-<div class="category">Crime</div>
-<table id="crime">
-  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
-  <tbody>
-    <tr><td>Привезти на титул Хаммер с ВЗХ</td><td><input type="number" value="3" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>5 раз получить оплату за доставку контрабанды в мафии</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Взломать 15 замков на ограблениях домов и/или угонах авто</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Закрасить 7 граффити, находясь в банде</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-  </tbody>
-</table>
+    window.onload = function () {
+      totalBPInput.value = localStorage.getItem('totalBP') || 0;
+      vipCheckbox.checked = localStorage.getItem('vip') === 'true';
 
-<div class="category">Гос</div>
-<table id="gov">
-  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
-  <tbody>
-    <tr><td>Выдать 5 медкарт, работая в EMS</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Закрыть 15 вызовов, работая в EMS</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Произвести 1 арест в КПЗ LSPD/LSSD</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Поставить 2 транспортных средства на учёт, работая в LSPD</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Закрыть 5 вызовов, работая в гос. (например, Код-0)</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
-  </tbody>
-</table>
+      tables.forEach(table => {
+        table.querySelectorAll('tbody tr').forEach((row, index) => {
+          const checkbox = row.querySelector('input[type="checkbox"]');
+          const bpInput = row.querySelector('input[type="number"]');
+          const savedBP = localStorage.getItem('bp_' + table.id + '_' + index);
+          const savedChecked = localStorage.getItem('checkbox_' + table.id + '_' + index);
 
-<div id="totalBPContainer">
-  Общее BP: <input type="number" id="totalBP" value="0" min="0">
-</div>
+          if (savedBP) bpInput.value = savedBP;
+          if (savedChecked === 'true') {
+            checkbox.checked = true;
+            row.classList.add('checked');
+          }
 
-<script>
-const vipCheckbox = document.getElementById('vipCheckbox');
-const tables = document.querySelectorAll('table');
-const totalBPInput = document.getElementById('totalBP');
-const resetBtn = document.getElementById('resetCheckboxes');
+          checkbox.addEventListener('change', function () {
+            const wasChecked = localStorage.getItem('checkbox_' + table.id + '_' + index) === 'true';
+            if (checkbox.checked && !wasChecked) {
+              let total = parseInt(totalBPInput.value) || 0;
+              const vipMultiplier = vipCheckbox.checked ? 2 : 1;
+              total += (parseInt(bpInput.value) || 0) * vipMultiplier;
+              totalBPInput.value = total;
+              localStorage.setItem('totalBP', total);
+            }
+            row.classList.toggle('checked', checkbox.checked);
+            localStorage.setItem('checkbox_' + table.id + '_' + index, checkbox.checked);
+          });
 
-// Восстановление данных
-if(localStorage.getItem('totalBP')) totalBPInput.value = localStorage.getItem('totalBP');
-if(localStorage.getItem('vip') === 'true') vipCheckbox.checked = true;
+          bpInput.addEventListener('input', function () {
+            localStorage.setItem('bp_' + table.id + '_' + index, bpInput.value);
+          });
+        });
+      });
 
-function updateTotal() {
-  let total = 0;
-  const vipMultiplier = vipCheckbox.checked ? 2 : 1;
+      vipCheckbox.addEventListener('change', function () {
+        localStorage.setItem('vip', vipCheckbox.checked);
+      });
 
-  tables.forEach(table => {
-    table.querySelectorAll('tbody tr').forEach((row, index) => {
-      const checkbox = row.querySelector('input[type="checkbox"]');
-      const bpInput = row.querySelector('input[type="number"]');
-      const bp = parseInt(bpInput.value) || 0;
+      totalBPInput.addEventListener('input', function () {
+        localStorage.setItem('totalBP', totalBPInput.value);
+      });
 
-      if (checkbox.checked) {
-        total += bp * vipMultiplier;
-        row.classList.add('checked');
-      } else {
-        row.classList.remove('checked');
-      }
-
-      localStorage.setItem('checkbox_' + table.id + '_' + index, checkbox.checked);
-      localStorage.setItem('bp_' + table.id + '_' + index, bpInput.value);
-    });
-  });
-
-  totalBPInput.value = total;
-  localStorage.setItem('totalBP', total);
-}
-
-// Восстановление состояний
-tables.forEach(table => {
-  table.querySelectorAll('tbody tr').forEach((row, index) => {
-    const checkbox = row.querySelector('input[type="checkbox"]');
-    const bpInput = row.querySelector('input[type="number"]');
-
-    if(localStorage.getItem('checkbox_' + table.id + '_' + index) === 'true') {
-        checkbox.checked = true;
-        row.classList.add('checked');
-    }
-    if(localStorage.getItem('bp_' + table.id + '_' + index)) bpInput.value = localStorage.getItem('bp_' + table.id + '_' + index);
-
-    checkbox.addEventListener('change', updateTotal);
-    bpInput.addEventListener('change', updateTotal);
-  });
-});
-
-// VIP x2
-vipCheckbox.addEventListener('change', () => {
-  localStorage.setItem('vip', vipCheckbox.checked);
-  updateTotal();
-});
-
-// Кнопка "Отменить всё"
-resetBtn.addEventListener('click', () => {
-  tables.forEach(table => {
-    table.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-  });
-  updateTotal();
-});
-
-// Инициализация
-updateTotal();
-</script>
-
+      resetBtn.addEventListener('click', function () {
+        tables.forEach(table => {
+          table.querySelectorAll('tbody tr').forEach((row, index) => {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            checkbox.checked = false;
+            row.classList.remove('checked');
+            localStorage.setItem('checkbox_' + table.id + '_' + index, false);
+          });
+        });
+      });
+    };
+  </script>
 </body>
 </html>
 
