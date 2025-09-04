@@ -6,18 +6,19 @@
 <title>GTA 5 RP - Бонуспоинты</title>
 <style>
 body { font-family: Arial, sans-serif; background:#1c1c1c; color:#f0f0f0; padding:20px; }
-h1 { text-align:center; color:#ffcc00; }
-table { width:100%; border-collapse: collapse; margin-bottom:20px; }
-th, td { border:1px solid #555; padding:10px; text-align:left; }
+h1 { text-align:center; color:#ffcc00; margin-bottom:20px; }
+#vipToggle { display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+#vipToggle label { margin-left:10px; font-size:1.2em; color:#00ccff; }
+#resetCheckboxes { padding:10px 20px; font-size:1em; cursor:pointer; display:block; margin:0 auto 20px auto; }
+.category { font-weight:bold; font-size:1.2em; margin-top:20px; color:#ff6600; text-align:center; }
+table { width:100%; border-collapse: collapse; margin-bottom:20px; table-layout: fixed; }
+th, td { border:1px solid #555; padding:10px; text-align:center; word-wrap: break-word; }
 th { background-color:#333; }
 tr:nth-child(even) { background-color:#2a2a2a; }
 input[type="checkbox"] { transform: scale(1.5); }
-input[type="number"] { width:60px; padding:5px; font-size:1em; text-align:center; background:#333; color:#fff; border:1px solid #555; border-radius:4px; }
+input[type="number"] { width:50px; padding:5px; font-size:1em; text-align:center; background:#333; color:#fff; border:1px solid #555; border-radius:4px; }
+tr.checked { background-color: #006400 !important; } /* зелёная подсветка */
 #totalBPContainer { font-size:1.5em; text-align:center; margin-top:20px; color:#00ff00; }
-#vipToggle { display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
-#vipToggle label { margin-left:10px; font-size:1.2em; color:#00ccff; }
-#resetCheckboxes { padding:10px 20px; font-size:1em; cursor:pointer; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto; }
-.category { font-weight:bold; font-size:1.2em; margin-top:20px; color:#ff6600; }
 </style>
 </head>
 <body>
@@ -31,58 +32,68 @@ input[type="number"] { width:60px; padding:5px; font-size:1em; text-align:center
 
 <button id="resetCheckboxes">Отменить всё</button>
 
-<div class="category">Обычные способы фарма</div>
-<table id="normal">
-  <thead>
-    <tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr>
-  </thead>
+<!-- Таблицы с бонуспоинтами -->
+
+<div class="category">Одиночные</div>
+<table id="solo">
+  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
   <tbody>
-    <tr><td>3 часа в онлайне</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Нули в казино</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>25 действий на стройке</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>25 действий в порту</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>25 действий в шахте</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>3 победы в Дэнс Баттлах</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Заказ материалов для бизнеса вручную</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>20 подходов в тренажерном зале</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Успешная тренировка в тире</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>10 посылок на почте</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Арендовать киностудию</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Купить лотерейный билет</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выиграть гонку в картинге</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>10 действий на ферме</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Потушить 25 огоньков пожарным</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выкопать 1 сокровище</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Проехать 1 уличную гонку</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выполнить 15 заказов дальнобойщиком</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Два раза оплатить смену внешности у хирурга</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Добавить 5 видео в кинотеатре</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выиграть 5 игр в тренировочном комплексе</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выиграть 3 игры на арене</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>2 круга на маршруте автобусника</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>5 раз снять 100% шкуру с животных</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Поймать золотую рыбку</td><td><input type="number" value="10" data-max="10" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Арендовать Киностудию (с VIP скидкой)</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выполнить 1 успешную тренировку в тире</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выиграть в казино, поставив на 0 или 00</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Провести 3 часа в игре</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выполнить 20 подходов на тренажёре</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Купить 1 лотерейный билет через телефон</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Добавить 5 видео в Кинотеатр</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
   </tbody>
 </table>
 
-<div class="category">Фракционные способы фарма</div>
-<table id="faction">
-  <thead>
-    <tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr>
-  </thead>
+<div class="category">Работа</div>
+<table id="work">
+  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
   <tbody>
-    <tr><td>7 закрашенных граффити</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Сдать 5 контрабанды</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Участие в каптах/бизварах</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Сдать Хаммер с ВЗХ</td><td><input type="number" value="3" data-max="6" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>5 выданных медкарт в EMS</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Закрыть 15 вызовов в EMS</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Отредактировать 40 объявлений в WN</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Взломать 15 замков на ограбах</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Закрыть 5 кодов в силовых структурах</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Поставить на учет 2 автомобиля (LSPD)</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Произвести 1 арест в КПЗ</td><td><input type="number" value="1" data-max="2" min="0"></td><td><input type="checkbox"></td></tr>
-    <tr><td>Выкупить двух человек из КПЗ</td><td><input type="number" value="2" data-max="4" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выполнить 25 действий в порту</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выполнить 25 действий на стройке</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выполнить 25 действий на шахте</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Потушить 25 огоньков, работая пожарным</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Доставить 10 посылок, работая почтальоном</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выполнить 10 действий на ферме</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выполнить 2 рейса на любом маршруте, работая водителем автобуса</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+  </tbody>
+</table>
+
+<div class="category">Парные</div>
+<table id="pair">
+  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
+  <tbody>
+    <tr><td>Выиграть 1 гонку на картинге</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Проехать 1 уличную гонку</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Победить 3 раза в Dance Battle</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выиграть 3 игры на Арене Maze Bank со ставкой от 100$</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Выиграть 5 игр в ТК со ставкой от 100$</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+  </tbody>
+</table>
+
+<div class="category">Crime</div>
+<table id="crime">
+  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
+  <tbody>
+    <tr><td>Привезти на титул Хаммер с ВЗХ</td><td><input type="number" value="3" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>5 раз получить оплату за доставку контрабанды в мафии</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Взломать 15 замков на ограблениях домов и/или угонах авто</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Закрасить 7 граффити, находясь в банде</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+  </tbody>
+</table>
+
+<div class="category">Гос</div>
+<table id="gov">
+  <thead><tr><th>Действие</th><th>BP</th><th>Выполнено</th></tr></thead>
+  <tbody>
+    <tr><td>Выдать 5 медкарт, работая в EMS</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Закрыть 15 вызовов, работая в EMS</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Произвести 1 арест в КПЗ LSPD/LSSD</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Поставить 2 транспортных средства на учёт, работая в LSPD</td><td><input type="number" value="1" min="0"></td><td><input type="checkbox"></td></tr>
+    <tr><td>Закрыть 5 вызовов, работая в гос. (например, Код-0)</td><td><input type="number" value="2" min="0"></td><td><input type="checkbox"></td></tr>
   </tbody>
 </table>
 
@@ -96,42 +107,71 @@ const tables = document.querySelectorAll('table');
 const totalBPInput = document.getElementById('totalBP');
 const resetBtn = document.getElementById('resetCheckboxes');
 
-let resetFlag = false;
+// Восстановление данных
+if(localStorage.getItem('totalBP')) totalBPInput.value = localStorage.getItem('totalBP');
+if(localStorage.getItem('vip') === 'true') vipCheckbox.checked = true;
 
 function updateTotal() {
   let total = 0;
   const vipMultiplier = vipCheckbox.checked ? 2 : 1;
+
   tables.forEach(table => {
-    table.querySelectorAll('tbody tr').forEach(row => {
+    table.querySelectorAll('tbody tr').forEach((row, index) => {
       const checkbox = row.querySelector('input[type="checkbox"]');
       const bpInput = row.querySelector('input[type="number"]');
       const bp = parseInt(bpInput.value) || 0;
-      if (checkbox.checked) total += bp * vipMultiplier;
+
+      if (checkbox.checked) {
+        total += bp * vipMultiplier;
+        row.classList.add('checked');
+      } else {
+        row.classList.remove('checked');
+      }
+
+      localStorage.setItem('checkbox_' + table.id + '_' + index, checkbox.checked);
+      localStorage.setItem('bp_' + table.id + '_' + index, bpInput.value);
     });
   });
-  if (!resetFlag) totalBPInput.value = total;
+
+  totalBPInput.value = total;
+  localStorage.setItem('totalBP', total);
 }
 
-// Галочки и BP
+// Восстановление состояний
 tables.forEach(table => {
-  table.querySelectorAll('input[type="checkbox"], input[type="number"]').forEach(input => {
-    input.addEventListener('change', () => { resetFlag = false; updateTotal(); });
+  table.querySelectorAll('tbody tr').forEach((row, index) => {
+    const checkbox = row.querySelector('input[type="checkbox"]');
+    const bpInput = row.querySelector('input[type="number"]');
+
+    if(localStorage.getItem('checkbox_' + table.id + '_' + index) === 'true') {
+        checkbox.checked = true;
+        row.classList.add('checked');
+    }
+    if(localStorage.getItem('bp_' + table.id + '_' + index)) bpInput.value = localStorage.getItem('bp_' + table.id + '_' + index);
+
+    checkbox.addEventListener('change', updateTotal);
+    bpInput.addEventListener('change', updateTotal);
   });
 });
 
 // VIP x2
-vipCheckbox.addEventListener('change', () => { resetFlag = false; updateTotal(); });
+vipCheckbox.addEventListener('change', () => {
+  localStorage.setItem('vip', vipCheckbox.checked);
+  updateTotal();
+});
 
 // Кнопка "Отменить всё"
 resetBtn.addEventListener('click', () => {
-  resetFlag = true;
   tables.forEach(table => {
     table.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
   });
+  updateTotal();
 });
 
+// Инициализация
 updateTotal();
 </script>
 
 </body>
 </html>
+
