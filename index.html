@@ -11,7 +11,7 @@ th, td { padding: 10px; border: 1px solid #333; text-align: left; }
 th { background: #ff9800; color: #000; text-align: center; }
 td.bp { text-align: center; width: 80px; color:#ff9800; font-weight:bold; }
 td.check { text-align: center; width: 60px; }
-tr.checked { background: #2e7d32; color:#fff; }
+tr.checked { background: #2e7d32; color:#fff; transition: 0.3s; }
 .total-bar { margin:30px auto; width:900px; padding:15px; background:#1c1c1c; border:2px solid #ff9800; border-radius:10px; font-size:20px; font-weight:bold; color:#ff9800; }
 .reset-btn { padding:10px 20px; background:#ff5722; border:none; color:white; cursor:pointer; border-radius:8px; font-size:16px; margin-top:10px; transition:0.3s; }
 .reset-btn:hover { background:#e64a19; }
@@ -33,7 +33,7 @@ input#manualBP { width:80px; text-align:center; font-size:16px; background:#222;
 Общий BP: <input type="number" id="manualBP">
 </div>
 
-<!-- Таблицы бонуспоинтов: Одиночные, Работа, Парные, Crime, Гос -->
+<!-- Таблицы бонуспоинтов -->
 <table id="single">
 <thead><tr><th>Одиночные</th><th>BP</th><th>✔</th></tr></thead>
 <tbody>
@@ -107,6 +107,8 @@ input#manualBP { width:80px; text-align:center; font-size:16px; background:#222;
 const vipCheckbox = document.getElementById('vip');
 const manualBP = document.getElementById('manualBP');
 const totalBPElement = document.getElementById('totalBP');
+const maxBP = 15000;
+
 let totalBP = parseInt(localStorage.getItem('totalBP')) || 0;
 totalBPElement.textContent = totalBP;
 manualBP.value = totalBP;
@@ -116,12 +118,18 @@ vipCheckbox.addEventListener('change',()=>{ localStorage.setItem('vip',vipCheckb
 
 manualBP.addEventListener('change',()=>{
     totalBP=parseInt(manualBP.value)||0;
+    totalBP=Math.min(totalBP,maxBP);
     totalBPElement.textContent=totalBP;
     localStorage.setItem('totalBP',totalBP);
     updateProgressBar();
 });
 
+function updateProgressBar(){
+    const progressPercent = Math.min(totalBP / maxBP * 100, 100);
+    document.getElementById('bpProgressBar').style.width = progressPercent + '%';
+}
 
+updateProgressBar();
 
 // Галочки и добавление BP
 document.querySelectorAll('table').forEach((table,tIndex)=>{
@@ -136,17 +144,19 @@ document.querySelectorAll('table').forEach((table,tIndex)=>{
         }
 
         checkbox.addEventListener('change',()=>{
+            row.classList.toggle('checked',checkbox.checked);
+            localStorage.setItem(`cb_${tIndex}_${rIndex}`,checkbox.checked);
+
             if(checkbox.checked && !row.dataset.added){
-                const multiplier=vipCheckbox.checked?2:1;
-                totalBP+=bp*multiplier;
-                totalBPElement.textContent=totalBP;
-                manualBP.value=totalBP;
+                const multiplier = vipCheckbox.checked?2:1;
+                totalBP += bp*multiplier;
+                if(totalBP > maxBP) totalBP = maxBP;
+                totalBPElement.textContent = totalBP;
+                manualBP.value = totalBP;
                 localStorage.setItem('totalBP',totalBP);
                 row.dataset.added='true';
                 updateProgressBar();
             }
-            row.classList.toggle('checked',checkbox.checked);
-            localStorage.setItem(`cb_${tIndex}_${rIndex}`,checkbox.checked);
         });
     });
 });
