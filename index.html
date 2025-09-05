@@ -11,7 +11,7 @@ th, td { padding: 10px; border: 1px solid #333; text-align: left; }
 th { background: #ff9800; color: #000; text-align: center; }
 td.bp { text-align: center; width: 80px; color:#ff9800; font-weight:bold; }
 td.check { text-align: center; width: 60px; }
-tr.checked { background: #2e7d32; color:#fff; transition: 0.3s; }
+tr.checked { background: #2e7d32; color:#fff; }
 .total-bar { margin:30px auto; width:900px; padding:15px; background:#1c1c1c; border:2px solid #ff9800; border-radius:10px; font-size:20px; font-weight:bold; color:#ff9800; }
 .reset-btn { padding:10px 20px; background:#ff5722; border:none; color:white; cursor:pointer; border-radius:8px; font-size:16px; margin-top:10px; transition:0.3s; }
 .reset-btn:hover { background:#e64a19; }
@@ -33,7 +33,7 @@ input#manualBP { width:80px; text-align:center; font-size:16px; background:#222;
 Общий BP: <input type="number" id="manualBP">
 </div>
 
-<!-- Таблицы бонуспоинтов -->
+<!-- Таблица: Одиночные -->
 <table id="single">
 <thead><tr><th>Одиночные</th><th>BP</th><th>✔</th></tr></thead>
 <tbody>
@@ -44,9 +44,12 @@ input#manualBP { width:80px; text-align:center; font-size:16px; background:#222;
 <tr><td>20 подходов на тренажёре в спортзале</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
 <tr><td>Купить 1 лотерейный билет через телефон</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
 <tr><td>Добавить 5 видео в Кинотеатр</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
+<tr><td>Выкопать 1 сокровище (не мусор)</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
+<tr><td>5 раз снять 100% шкуру с животных</td><td class="bp">4</td><td class="check"><input type="checkbox"></td></tr>
 </tbody>
 </table>
 
+<!-- Остальные таблицы (Работа, Парные, Crime, Гос) остаются без изменений -->
 <table id="work">
 <thead><tr><th>Работа</th><th>BP</th><th>✔</th></tr></thead>
 <tbody>
@@ -107,8 +110,6 @@ input#manualBP { width:80px; text-align:center; font-size:16px; background:#222;
 const vipCheckbox = document.getElementById('vip');
 const manualBP = document.getElementById('manualBP');
 const totalBPElement = document.getElementById('totalBP');
-const maxBP = 15000;
-
 let totalBP = parseInt(localStorage.getItem('totalBP')) || 0;
 totalBPElement.textContent = totalBP;
 manualBP.value = totalBP;
@@ -118,45 +119,62 @@ vipCheckbox.addEventListener('change',()=>{ localStorage.setItem('vip',vipCheckb
 
 manualBP.addEventListener('change',()=>{
     totalBP=parseInt(manualBP.value)||0;
-    totalBP=Math.min(totalBP,maxBP);
     totalBPElement.textContent=totalBP;
     localStorage.setItem('totalBP',totalBP);
     updateProgressBar();
 });
 
+// Прогресс-бар (0–15000)
 function updateProgressBar(){
-    const progressPercent = Math.min(totalBP / maxBP * 100, 100);
-    document.getElementById('bpProgressBar').style.width = progressPercent + '%';
+    const maxBP = 15000;
+    let progress = Math.min(totalBP, maxBP);
+    const percent = (progress/maxBP)*100;
+    document.getElementById('bpProgressBar').style.width = percent + '%';
 }
-
 updateProgressBar();
 
-// Галочки и добавление BP
+// Галочки + клики по строке
 document.querySelectorAll('table').forEach((table,tIndex)=>{
     table.querySelectorAll('tbody tr').forEach((row,rIndex)=>{
         const checkbox=row.querySelector('input[type="checkbox"]');
         const bp=parseInt(row.querySelector('.bp').textContent);
 
+        // Восстановление состояния
         if(localStorage.getItem(`cb_${tIndex}_${rIndex}`)==='true'){
             checkbox.checked=true;
             row.classList.add('checked');
-            row.dataset.added='true';
         }
 
+        function addPoints(){
+            const multiplier=vipCheckbox.checked?2:1;
+            totalBP+=bp*multiplier;
+            totalBPElement.textContent=totalBP;
+            manualBP.value=totalBP;
+            localStorage.setItem('totalBP',totalBP);
+            updateProgressBar();
+        }
+
+        // Клик по строке = переключение чекбокса
+        row.addEventListener('click',(e)=>{
+            if(e.target.tagName.toLowerCase()!=='input'){
+                checkbox.checked=!checkbox.checked;
+            }
+            row.classList.toggle('checked',checkbox.checked);
+
+            if(checkbox.checked){
+                addPoints();
+            }
+
+            localStorage.setItem(`cb_${tIndex}_${rIndex}`,checkbox.checked);
+        });
+
+        // Клик по самому чекбоксу
         checkbox.addEventListener('change',()=>{
             row.classList.toggle('checked',checkbox.checked);
-            localStorage.setItem(`cb_${tIndex}_${rIndex}`,checkbox.checked);
-
-            if(checkbox.checked && !row.dataset.added){
-                const multiplier = vipCheckbox.checked?2:1;
-                totalBP += bp*multiplier;
-                if(totalBP > maxBP) totalBP = maxBP;
-                totalBPElement.textContent = totalBP;
-                manualBP.value = totalBP;
-                localStorage.setItem('totalBP',totalBP);
-                row.dataset.added='true';
-                updateProgressBar();
+            if(checkbox.checked){
+                addPoints();
             }
+            localStorage.setItem(`cb_${tIndex}_${rIndex}`,checkbox.checked);
         });
     });
 });
@@ -175,5 +193,3 @@ document.getElementById('resetChecks').addEventListener('click',()=>{
 </script>
 </body>
 </html>
-
-
