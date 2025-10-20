@@ -1,195 +1,314 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8" />
 <title>GTA 5 RP — Бонуспоинты</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
-body { font-family: Arial, sans-serif; background: #121212; color: #fff; text-align: center; margin:0; padding:0; }
-h1 { margin: 20px 0; color: #ff9800; }
-table { width: 900px; margin: 20px auto; border-collapse: collapse; background: #1e1e1e; border: 2px solid #ff9800; border-radius: 10px; overflow: hidden; }
-th, td { padding: 10px; border: 1px solid #333; text-align: left; }
-th { background: #ff9800; color: #000; text-align: center; }
-td.bp { text-align: center; width: 80px; color:#ff9800; font-weight:bold; }
-td.check { text-align: center; width: 60px; }
-tr.checked { background: #2e7d32; color:#fff; }
-.total-bar { margin:30px auto; width:900px; padding:15px; background:#1c1c1c; border:2px solid #ff9800; border-radius:10px; font-size:20px; font-weight:bold; color:#ff9800; }
-.reset-btn { padding:10px 20px; background:#ff5722; border:none; color:white; cursor:pointer; border-radius:8px; font-size:16px; margin-top:10px; transition:0.3s; }
-.reset-btn:hover { background:#e64a19; }
-.vip-container { margin:20px; font-size:18px; color:#ff9800; }
-.vip-container input { width:20px; height:20px; cursor:pointer; }
-input#manualBP { width:80px; text-align:center; font-size:16px; background:#222; color:#fff; border:2px solid #ff9800; border-radius:5px; }
-
-.bp-progress-container { width:900px; margin:20px auto; background:#222; border:2px solid #ff9800; border-radius:10px; height:30px; position:relative; overflow:hidden;}
-#bpProgressBar { height:100%; width:0%; background:#ff9800; border-radius:8px; transition: width 0.5s ease;}
-.bp-progress-container span { position:absolute; width:100%; text-align:center; top:0; left:0; color:#fff; font-weight:bold; line-height:30px; }
+  :root{
+    --bg:#121212;
+    --panel:#1e1e1e;
+    --accent:#ff9800;
+    --accent-dark:#ff5722;
+    --green:#2e7d32;
+    --muted:#222;
+  }
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#fff;text-align:center}
+  h1{color:var(--accent);margin:18px 0}
+  .controls{width:900px;margin:0 auto 18px;display:flex;gap:18px;align-items:center;justify-content:center}
+  .controls label{color:var(--accent);font-size:16px;display:flex;align-items:center;gap:8px}
+  .controls input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
+  input#manualBP{width:120px;padding:6px 8px;background:var(--muted);border:2px solid var(--accent);border-radius:6px;color:#fff;text-align:center;font-size:16px}
+  table{width:900px;margin:18px auto;border-collapse:collapse;background:var(--panel);border:2px solid var(--accent);border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+  th,td{padding:10px;border:1px solid rgba(255,255,255,0.04);text-align:left}
+  th{background:var(--accent);color:#000;font-weight:700;text-align:center}
+  td.bp{text-align:center;color:var(--accent);font-weight:700;width:110px}
+  td.check{text-align:center;width:70px}
+  tr{cursor:pointer}
+  tr.checked{background:var(--green);color:#fff;transition:background .25s ease}
+  .total-bar{width:900px;margin:18px auto;padding:14px;background:#1c1c1c;border:2px solid var(--accent);border-radius:10px;font-size:18px;font-weight:700;color:var(--accent);box-shadow:0 6px 18px rgba(255,152,0,0.12)}
+  .reset-btn{padding:10px 18px;background:var(--accent-dark);border:none;color:#fff;border-radius:8px;cursor:pointer;font-size:15px}
+  .reset-btn:hover{background:#e64a19}
+  .bp-progress-container{width:900px;margin:18px auto;background:#222;border:2px solid var(--accent);border-radius:10px;height:34px;position:relative;overflow:hidden}
+  #bpProgressBar{height:100%;width:0;background:var(--accent);border-radius:8px;transition:width .5s ease}
+  .bp-progress-container span{position:absolute;width:100%;text-align:center;top:0;left:0;color:#fff;font-weight:700;line-height:34px}
+  @media (max-width:940px){
+    table,.controls,input#manualBP,.total-bar,.bp-progress-container{width:95%}
+  }
 </style>
 </head>
 <body>
-<h1>GTA 5 RP — Бонуспоинты</h1>
+  <h1>GTA 5 RP — Бонуспоинты</h1>
 
-<div class="vip-container">
-<label>VIP <input type="checkbox" id="vip"></label>
-&nbsp;&nbsp;&nbsp;
-Общий BP: <input type="number" id="manualBP">
-</div>
+  <div class="controls">
+    <label>VIP <input id="vip" type="checkbox"></label>
+    <label>×2 <input id="x2" type="checkbox"></label>
+    <label style="color:#fff">Общий BP: <input id="manualBP" type="number" min="0"></label>
+  </div>
 
-<!-- Таблица: Одиночные -->
-<table id="single">
-<thead><tr><th>Одиночные</th><th>BP</th><th>✔</th></tr></thead>
-<tbody>
-<tr><td>Арендовать Киностудию (с VIP скидка)</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Выполнить 1 успешную тренировку в тире</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Выиграть в казино (0 или 00)</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Провести 3 часа в игре (не АФК)</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>20 подходов на тренажёре в спортзале</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Купить 1 лотерейный билет через телефон</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Добавить 5 видео в Кинотеатр</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Выкопать 1 сокровище (не мусор)</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>5 раз снять 100% шкуру с животных</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-</tbody>
-</table>
+  <!-- NEW -->
+  <table id="new">
+    <thead><tr><th>НОВОЕ</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Посетить любой сайт в браузере</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Зайти в любой канал в Brawl</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Поставить лайк любой анкете в Match</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Прокрутить за DP серебрянный или золотой кейс</td><td class="bp">10/20</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Кинуть мяч питомцу 15 раз</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>15 выполненных питомцем команд</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Ставка в колесе удачи в казино (межсерверное колесо)</td><td class="bp">3/6</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Проехать 1 станцию на метро</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Поймать 20 рыб</td><td class="bp">4/8</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выполнить 2 квеста любых клубов</td><td class="bp">4/8</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Починить деталь в автосервисе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Забросить 2 мяча в баскетболе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Забить 2 гола в футболе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Победить в армрестлинге</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Победить в дартс</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Забить 10 голов в волейболе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Набрать 10 очков в настольном теннисе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Набрать 10 очков в большом теннисе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<!-- Остальные таблицы (Работа, Парные, Crime, Гос) остаются без изменений -->
-<table id="work">
-<thead><tr><th>Работа</th><th>BP</th><th>✔</th></tr></thead>
-<tbody>
-<tr><td>25 действий в порту</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>25 действий на стройке</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>25 действий на шахте</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Потушить 25 огоньков (пожарный)</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Доставить 10 посылок (почтальон)</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>10 действий на ферме</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>2 рейса на автобусе</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-</tbody>
-</table>
+  <!-- Одиночные -->
+  <table id="single">
+    <thead><tr><th>Одиночные</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Арендовать Киностудию (с VIP скидка)</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выполнить 1 успешную тренировку в тире</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выиграть в казино (0 или 00)</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Провести 3 часа в игре (не АФК)</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>20 подходов на тренажёре в спортзале</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Купить 1 лотерейный билет через телефон</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Добавить 5 видео в Кинотеатр</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выкопать 1 сокровище (не мусор)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>5 раз снять 100% шкуру с животных</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Поймать золотую рыбку</td><td class="bp">10/10</td><td class="check"><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<table id="pair">
-<thead><tr><th>Парные</th><th>BP</th><th>✔</th></tr></thead>
-<tbody>
-<tr><td>Выиграть 1 гонку на картинге</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Проехать 1 уличную гонку</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Победить 3 раза в Dance Battle</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Выиграть 3 игры на Арене Maze Bank со ставкой от 100$</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Выиграть 5 игр в ТК со ставкой от 100$</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-</tbody>
-</table>
+  <!-- Работа -->
+  <table id="work">
+    <thead><tr><th>Работа</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>25 действий в порту</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>25 действий на стройке</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>25 действий на шахте</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Потушить 25 огоньков (пожарный)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Доставить 10 посылок (почтальон)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>10 действий на ферме</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>2 рейса на автобусе</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выполнить 15 заказов дальнобойщиком в порт</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Два раза оплатить смену внешности у хирурга в EMS</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<table id="crime">
-<thead><tr><th>Crime</th><th>BP</th><th>✔</th></tr></thead>
-<tbody>
-<tr><td>Привезти на титул Хаммер с ВЗХ</td><td class="bp">3</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>5 раз получить оплату за доставку контрабанды</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Взломать 15 замков на ограблениях домов/авто</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Закрасить 7 граффити (в банде)</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-</tbody>
-</table>
+  <!-- Парные -->
+  <table id="pair">
+    <thead><tr><th>Парные</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Выиграть 1 гонку на картинге</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Проехать 1 уличную гонку</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Победить 3 раза в Dance Battle</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выиграть 3 игры на Арене Maze Bank со ставкой от 100$</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выиграть 5 игр в ТК со ставкой от 100$</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выиграть 5 игр в тренировочном комплексе со ставкой (от 100$)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Выиграть 3 любых игры на арене со ставкой (от 100$)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<table id="gov">
-<thead><tr><th>Гос</th><th>BP</th><th>✔</th></tr></thead>
-<tbody>
-<tr><td>Выдать 5 медкарт (EMS)</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Закрыть 15 вызовов (EMS)</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Произвести 1 арест в КПЗ LSPD/LSSD</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Поставить 2 авто на учёт (LSPD)</td><td class="bp">1</td><td class="check"><input type="checkbox"></td></tr>
-<tr><td>Закрыть 5 вызовов (гос, Код-0)</td><td class="bp">2</td><td class="check"><input type="checkbox"></td></tr>
-</tbody>
-</table>
+  <!-- Crime -->
+  <table id="crime">
+    <thead><tr><th>Crime</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Привезти на титул Хаммер с ВЗХ</td><td class="bp">3/6</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>5 раз получить оплату за доставку контрабанды</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Взломать 15 замков на ограблениях домов/авто</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Закрасить 7 граффити (в банде)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Сдать Хаммер с ВЗХ</td><td class="bp">3/6</td><td class="check"><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<div class="total-bar">
-Всего Бонуспоинтов: <span id="totalBP">0</span>
-<br><br>
-<button class="reset-btn" id="resetChecks">Сбросить галочки</button>
-</div>
+  <!-- Гос -->
+  <table id="gov">
+    <thead><tr><th>Гос</th><th>BP</th><th>✔</th></tr></thead>
+    <tbody>
+      <tr><td>Выдать 5 медкарт (EMS)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Закрыть 15 вызовов (EMS)</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Произвести 1 арест в КПЗ LSPD/LSSD</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Поставить 2 авто на учёт (LSPD)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Закрыть 5 вызовов (гос, Код-0)</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>5 выданных медкарт в EMS</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Закрыть 5 кодов в силовых структурах</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+    </tbody>
+  </table>
 
-<div class="bp-progress-container">
-  <div id="bpProgressBar"></div>
-  <span>Прогресс BP</span>
-</div>
+  <div class="total-bar">
+    Всего Бонуспоинтов: <span id="totalBP">0</span>
+    <br><br>
+    <button id="resetChecks" class="reset-btn">Сбросить галочки</button>
+  </div>
+
+  <div class="bp-progress-container">
+    <div id="bpProgressBar"></div>
+    <span id="bpProgressText">Прогресс BP</span>
+  </div>
 
 <script>
-const vipCheckbox = document.getElementById('vip');
-const manualBP = document.getElementById('manualBP');
-const totalBPElement = document.getElementById('totalBP');
-let totalBP = parseInt(localStorage.getItem('totalBP')) || 0;
-totalBPElement.textContent = totalBP;
-manualBP.value = totalBP;
+(function(){
+  // элементы
+  const vip = document.getElementById('vip');
+  const x2 = document.getElementById('x2');
+  const manualBP = document.getElementById('manualBP');
+  const totalBPEl = document.getElementById('totalBP');
+  const bpBar = document.getElementById('bpProgressBar');
+  const bpText = document.getElementById('bpProgressText');
+  const RESET_BTN = document.getElementById('resetChecks');
+  const MAX_BP = 15000;
 
-vipCheckbox.checked = localStorage.getItem('vip')==='true';
-vipCheckbox.addEventListener('change',()=>{ localStorage.setItem('vip',vipCheckbox.checked); updateProgressBar(); });
+  // загрузка состояния
+  let totalBP = parseInt(localStorage.getItem('totalBP')) || 0;
+  totalBP = Math.max(0, totalBP);
+  totalBPEl.textContent = totalBP;
+  manualBP.value = totalBP;
 
-manualBP.addEventListener('change',()=>{
-    totalBP=parseInt(manualBP.value)||0;
-    totalBPElement.textContent=totalBP;
-    localStorage.setItem('totalBP',totalBP);
-    updateProgressBar();
-});
+  vip.checked = localStorage.getItem('vip') === 'true';
+  x2.checked = localStorage.getItem('x2') === 'true';
 
-// Прогресс-бар (0–15000)
-function updateProgressBar(){
-    const maxBP = 15000;
-    let progress = Math.min(totalBP, maxBP);
-    const percent = (progress/maxBP)*100;
-    document.getElementById('bpProgressBar').style.width = percent + '%';
-}
-updateProgressBar();
+  // сохранение
+  function saveState(){
+    localStorage.setItem('totalBP', totalBP);
+    localStorage.setItem('vip', vip.checked);
+    localStorage.setItem('x2', x2.checked);
+  }
 
-// Галочки + клики по строке
-document.querySelectorAll('table').forEach((table,tIndex)=>{
-    table.querySelectorAll('tbody tr').forEach((row,rIndex)=>{
-        const checkbox=row.querySelector('input[type="checkbox"]');
-        const bp=parseInt(row.querySelector('.bp').textContent);
+  // вычисление множителя и выбор low/high
+  function parseBPCell(cellText){
+    // cellText like "2/4" or "10/20" or "10/10" or "2"
+    const parts = cellText.trim().split('/');
+    const low = parseInt(parts[0]) || 0;
+    const high = parts[1] ? parseInt(parts[1]) || low : low;
+    return {low, high};
+  }
+  function getEffectiveToAdd(low, high){
+    // rule:
+    // none => low
+    // vip xor x2 => high
+    // both => high * 2
+    const vipOn = vip.checked;
+    const x2On = x2.checked;
+    if(vipOn && x2On) return high * 2;
+    if(vipOn || x2On) return high;
+    return low;
+  }
 
-        // Восстановление состояния
-        if(localStorage.getItem(`cb_${tIndex}_${rIndex}`)==='true'){
-            checkbox.checked=true;
-            row.classList.add('checked');
-        }
+  // прогресс-бар
+  function updateProgress(){
+    const capped = Math.min(Math.max(totalBP,0), MAX_BP);
+    const percent = Math.round((capped / MAX_BP) * 100);
+    bpBar.style.width = percent + '%';
+    bpText.textContent = `${capped} / ${MAX_BP} BP`;
+    totalBPEl.textContent = totalBP;
+    manualBP.value = totalBP;
+  }
+  updateProgress();
 
-        function addPoints(){
-            const multiplier=vipCheckbox.checked?2:1;
-            totalBP+=bp*multiplier;
-            totalBPElement.textContent=totalBP;
-            manualBP.value=totalBP;
-            localStorage.setItem('totalBP',totalBP);
-            updateProgressBar();
-        }
+  // слушатели VIP и x2
+  vip.addEventListener('change', ()=>{
+    localStorage.setItem('vip', vip.checked);
+  });
+  x2.addEventListener('change', ()=>{
+    localStorage.setItem('x2', x2.checked);
+  });
 
-        // Клик по строке = переключение чекбокса
-        row.addEventListener('click',(e)=>{
-            if(e.target.tagName.toLowerCase()!=='input'){
-                checkbox.checked=!checkbox.checked;
-            }
-            row.classList.toggle('checked',checkbox.checked);
+  // ручное изменение BP
+  manualBP.addEventListener('change', ()=>{
+    let v = parseInt(manualBP.value) || 0;
+    totalBP = Math.max(0, v);
+    saveState();
+    updateProgress();
+  });
 
-            if(checkbox.checked){
-                addPoints();
-            }
+  // helper: обработка строки (клик или чекбокс)
+  function setupRow(row, tableIndex, rowIndex){
+    const checkbox = row.querySelector('input[type="checkbox"]');
+    const bpCell = row.querySelector('.bp');
+    const bpParsed = parseBPCell(bpCell.textContent);
 
-            localStorage.setItem(`cb_${tIndex}_${rIndex}`,checkbox.checked);
-        });
+    // восстановление визуала
+    const stored = localStorage.getItem(`cb_${tableIndex}_${rowIndex}`);
+    if(stored === 'true'){
+      checkbox.checked = true;
+      row.classList.add('checked');
+    } else {
+      checkbox.checked = false;
+      row.classList.remove('checked');
+    }
 
-        // Клик по самому чекбоксу
-        checkbox.addEventListener('change',()=>{
-            row.classList.toggle('checked',checkbox.checked);
-            if(checkbox.checked){
-                addPoints();
-            }
-            localStorage.setItem(`cb_${tIndex}_${rIndex}`,checkbox.checked);
-        });
+    // функция добавления (вызывается каждый раз, когда чек становится true)
+    function addPointsOnce(){
+      const toAdd = getEffectiveToAdd(bpParsed.low, bpParsed.high);
+      totalBP += toAdd;
+      saveState();
+      updateProgress();
+    }
+
+    // on checkbox change: if becomes checked -> add
+    checkbox.addEventListener('change', (e)=>{
+      // toggle visual
+      row.classList.toggle('checked', checkbox.checked);
+      // save checkbox UI state
+      localStorage.setItem(`cb_${tableIndex}_${rowIndex}`, checkbox.checked);
+      // if checked -> add points (even if previously checked before reload)
+      if(checkbox.checked){
+        addPointsOnce();
+      }
+      // don't remove points on uncheck
     });
-});
 
-// Сброс галочек
-document.getElementById('resetChecks').addEventListener('click',()=>{
-    document.querySelectorAll('table').forEach((table,tIndex)=>{
-        table.querySelectorAll('tbody tr').forEach((row,rIndex)=>{
-            const checkbox=row.querySelector('input[type="checkbox"]');
-            checkbox.checked=false;
-            row.classList.remove('checked');
-            localStorage.setItem(`cb_${tIndex}_${rIndex}`,false);
-        });
+    // click on row -> simulate checkbox click unless target is input
+    row.addEventListener('click', (e)=>{
+      if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'input') {
+        // clicked directly on checkbox — already handled by change listener
+        return;
+      }
+      // toggle checkbox (this will trigger change event)
+      checkbox.checked = !checkbox.checked;
+      // manually trigger change event for compatibility
+      const ev = new Event('change', { bubbles: true });
+      checkbox.dispatchEvent(ev);
     });
-});
+  }
+
+  // пробегаем все таблицы + строки и навешиваем логику
+  const tables = Array.from(document.querySelectorAll('table'));
+  tables.forEach((table, tIndex)=>{
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+    rows.forEach((row, rIndex)=>{
+      setupRow(row, tIndex, rIndex);
+    });
+  });
+
+  // reset checks (не трогает totalBP)
+  RESET_BTN.addEventListener('click', ()=>{
+    tables.forEach((table, tIndex)=>{
+      const rows = Array.from(table.querySelectorAll('tbody tr'));
+      rows.forEach((row, rIndex)=>{
+        const checkbox = row.querySelector('input[type="checkbox"]');
+        checkbox.checked = false;
+        row.classList.remove('checked');
+        localStorage.setItem(`cb_${tIndex}_${rIndex}`, false);
+      });
+    });
+    // totalBP remains
+    updateProgress();
+  });
+
+  // сохранить при уходе
+  window.addEventListener('beforeunload', saveState);
+
+})();
 </script>
 </body>
 </html>
