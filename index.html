@@ -12,26 +12,27 @@
     --accent-dark:#ff5722;
     --green:#2e7d32;
     --muted:#222;
+    --text:#fff;
   }
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#fff;text-align:center}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);text-align:center}
   h1{color:var(--accent);margin:18px 0}
-  .controls{width:900px;margin:0 auto 18px;display:flex;gap:18px;align-items:center;justify-content:center}
+  .controls{width:900px;margin:0 auto 18px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
   .controls label{color:var(--accent);font-size:16px;display:flex;align-items:center;gap:8px}
   .controls input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
   input#manualBP{width:120px;padding:6px 8px;background:var(--muted);border:2px solid var(--accent);border-radius:6px;color:#fff;text-align:center;font-size:16px}
   table{width:900px;margin:18px auto;border-collapse:collapse;background:var(--panel);border:2px solid var(--accent);border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
-  th,td{padding:10px;border:1px solid rgba(255,255,255,0.04);text-align:left}
+  th,td{padding:10px;border:1px solid rgba(255,255,255,0.04);text-align:left;vertical-align:middle}
   th{background:var(--accent);color:#000;font-weight:700;text-align:center}
-  td.bp{text-align:center;color:var(--accent);font-weight:700;width:110px}
+  td.bp{text-align:center;color:var(--accent);font-weight:700;width:140px}
   td.check{text-align:center;width:70px}
   tr{cursor:pointer}
   tr.checked{background:var(--green);color:#fff;transition:background .25s ease}
   .total-bar{width:900px;margin:18px auto;padding:14px;background:#1c1c1c;border:2px solid var(--accent);border-radius:10px;font-size:18px;font-weight:700;color:var(--accent);box-shadow:0 6px 18px rgba(255,152,0,0.12)}
   .reset-btn{padding:10px 18px;background:var(--accent-dark);border:none;color:#fff;border-radius:8px;cursor:pointer;font-size:15px}
   .reset-btn:hover{background:#e64a19}
-  .bp-progress-container{width:900px;margin:18px auto;background:#222;border:2px solid var(--accent);border-radius:10px;height:34px;position:relative;overflow:hidden}
+  .bp-progress-container{width:900px;margin:18px auto;background:#222;border:2px solid var(--accent);border-radius:10px;height:36px;position:relative;overflow:hidden}
   #bpProgressBar{height:100%;width:0;background:var(--accent);border-radius:8px;transition:width .5s ease}
-  .bp-progress-container span{position:absolute;width:100%;text-align:center;top:0;left:0;color:#fff;font-weight:700;line-height:34px}
+  .bp-progress-container span{position:absolute;width:100%;text-align:center;top:0;left:0;color:#fff;font-weight:700;line-height:36px}
   @media (max-width:940px){
     table,.controls,input#manualBP,.total-bar,.bp-progress-container{width:95%}
   }
@@ -46,7 +47,7 @@
     <label style="color:#fff">Общий BP: <input id="manualBP" type="number" min="0"></label>
   </div>
 
-  <!-- NEW -->
+  <!-- НОВОЕ -->
   <table id="new">
     <thead><tr><th>НОВОЕ</th><th>BP</th><th>✔</th></tr></thead>
     <tbody>
@@ -84,7 +85,7 @@
       <tr><td>Добавить 5 видео в Кинотеатр</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выкопать 1 сокровище (не мусор)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>5 раз снять 100% шкуру с животных</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
-      <tr><td>Поймать золотую рыбку</td><td class="bp">10/10</td><td class="check"><input type="checkbox"></td></tr>
+      <!-- "Поймать золотую рыбку" удалено по просьбе -->
     </tbody>
   </table>
 
@@ -100,7 +101,7 @@
       <tr><td>10 действий на ферме</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>2 рейса на автобусе</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выполнить 15 заказов дальнобойщиком в порт</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
-      <tr><td>Два раза оплатить смену внешности у хирурга в EMS</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
+      <!-- "Два раза оплатить смену внешности..." удалено по просьбе -->
     </tbody>
   </table>
 
@@ -112,9 +113,8 @@
       <tr><td>Проехать 1 уличную гонку</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Победить 3 раза в Dance Battle</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выиграть 3 игры на Арене Maze Bank со ставкой от 100$</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
-      <tr><td>Выиграть 5 игр в ТК со ставкой от 100$</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выиграть 5 игр в тренировочном комплексе со ставкой (от 100$)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
-      <tr><td>Выиграть 3 любых игры на арене со ставкой (от 100$)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+
     </tbody>
   </table>
 
@@ -158,8 +158,8 @@
 <script>
 (function(){
   // элементы
-  const vip = document.getElementById('vip');
-  const x2 = document.getElementById('x2');
+  const vipEl = document.getElementById('vip');
+  const x2El = document.getElementById('x2');
   const manualBP = document.getElementById('manualBP');
   const totalBPEl = document.getElementById('totalBP');
   const bpBar = document.getElementById('bpProgressBar');
@@ -167,62 +167,51 @@
   const RESET_BTN = document.getElementById('resetChecks');
   const MAX_BP = 15000;
 
-  // загрузка состояния
+  // состояние
   let totalBP = parseInt(localStorage.getItem('totalBP')) || 0;
   totalBP = Math.max(0, totalBP);
   totalBPEl.textContent = totalBP;
   manualBP.value = totalBP;
 
-  vip.checked = localStorage.getItem('vip') === 'true';
-  x2.checked = localStorage.getItem('x2') === 'true';
+  vipEl.checked = localStorage.getItem('vip') === 'true';
+  x2El.checked = localStorage.getItem('x2') === 'true';
 
-  // сохранение
-  function saveState(){
-    localStorage.setItem('totalBP', totalBP);
-    localStorage.setItem('vip', vip.checked);
-    localStorage.setItem('x2', x2.checked);
-  }
-
-  // вычисление множителя и выбор low/high
-  function parseBPCell(cellText){
-    // cellText like "2/4" or "10/20" or "10/10" or "2"
-    const parts = cellText.trim().split('/');
+  // helper: parse cell like "2/4" or "10/10" or "1/2"
+  function parseBPCell(text) {
+    const parts = text.trim().split('/');
     const low = parseInt(parts[0]) || 0;
     const high = parts[1] ? parseInt(parts[1]) || low : low;
-    return {low, high};
+    return { low, high };
   }
-  function getEffectiveToAdd(low, high){
-    // rule:
-    // none => low
-    // vip xor x2 => high
-    // both => high * 2
-    const vipOn = vip.checked;
-    const x2On = x2.checked;
-    if(vipOn && x2On) return high * 2;
-    if(vipOn || x2On) return high;
+
+  function getEffectiveToAdd(low, high) {
+    const vip = vipEl.checked;
+    const x2 = x2El.checked;
+    if (vip && x2) return high * 2;
+    if (vip || x2) return high;
     return low;
   }
 
-  // прогресс-бар
-  function updateProgress(){
-    const capped = Math.min(Math.max(totalBP,0), MAX_BP);
-    const percent = Math.round((capped / MAX_BP) * 100);
-    bpBar.style.width = percent + '%';
+  function saveState() {
+    localStorage.setItem('totalBP', totalBP);
+    localStorage.setItem('vip', vipEl.checked);
+    localStorage.setItem('x2', x2El.checked);
+  }
+
+  function updateProgress() {
+    const capped = Math.min(Math.max(totalBP, 0), MAX_BP);
+    const pct = Math.round((capped / MAX_BP) * 100);
+    bpBar.style.width = pct + '%';
     bpText.textContent = `${capped} / ${MAX_BP} BP`;
     totalBPEl.textContent = totalBP;
     manualBP.value = totalBP;
   }
   updateProgress();
 
-  // слушатели VIP и x2
-  vip.addEventListener('change', ()=>{
-    localStorage.setItem('vip', vip.checked);
-  });
-  x2.addEventListener('change', ()=>{
-    localStorage.setItem('x2', x2.checked);
-  });
+  // при смене VIP/x2 — просто сохраняем (вклад не пересчитываем автоматически, т.к. БП добавляются при клике)
+  vipEl.addEventListener('change', ()=> { localStorage.setItem('vip', vipEl.checked); });
+  x2El.addEventListener('change', ()=> { localStorage.setItem('x2', x2El.checked); });
 
-  // ручное изменение BP
   manualBP.addEventListener('change', ()=>{
     let v = parseInt(manualBP.value) || 0;
     totalBP = Math.max(0, v);
@@ -230,78 +219,69 @@
     updateProgress();
   });
 
-  // helper: обработка строки (клик или чекбокс)
-  function setupRow(row, tableIndex, rowIndex){
-    const checkbox = row.querySelector('input[type="checkbox"]');
-    const bpCell = row.querySelector('.bp');
-    const bpParsed = parseBPCell(bpCell.textContent);
-
-    // восстановление визуала
-    const stored = localStorage.getItem(`cb_${tableIndex}_${rowIndex}`);
-    if(stored === 'true'){
-      checkbox.checked = true;
-      row.classList.add('checked');
-    } else {
-      checkbox.checked = false;
-      row.classList.remove('checked');
-    }
-
-    // функция добавления (вызывается каждый раз, когда чек становится true)
-    function addPointsOnce(){
-      const toAdd = getEffectiveToAdd(bpParsed.low, bpParsed.high);
-      totalBP += toAdd;
-      saveState();
-      updateProgress();
-    }
-
-    // on checkbox change: if becomes checked -> add
-    checkbox.addEventListener('change', (e)=>{
-      // toggle visual
-      row.classList.toggle('checked', checkbox.checked);
-      // save checkbox UI state
-      localStorage.setItem(`cb_${tableIndex}_${rowIndex}`, checkbox.checked);
-      // if checked -> add points (even if previously checked before reload)
-      if(checkbox.checked){
-        addPointsOnce();
-      }
-      // don't remove points on uncheck
-    });
-
-    // click on row -> simulate checkbox click unless target is input
-    row.addEventListener('click', (e)=>{
-      if(e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'input') {
-        // clicked directly on checkbox — already handled by change listener
-        return;
-      }
-      // toggle checkbox (this will trigger change event)
-      checkbox.checked = !checkbox.checked;
-      // manually trigger change event for compatibility
-      const ev = new Event('change', { bubbles: true });
-      checkbox.dispatchEvent(ev);
-    });
-  }
-
-  // пробегаем все таблицы + строки и навешиваем логику
+  // навесим логику на все строки всех таблиц
   const tables = Array.from(document.querySelectorAll('table'));
-  tables.forEach((table, tIndex)=>{
+  tables.forEach((table, tIndex) => {
     const rows = Array.from(table.querySelectorAll('tbody tr'));
-    rows.forEach((row, rIndex)=>{
-      setupRow(row, tIndex, rIndex);
+    rows.forEach((row, rIndex) => {
+      const checkbox = row.querySelector('input[type="checkbox"]');
+      const bpCell = row.querySelector('.bp');
+      const parsed = parseBPCell(bpCell.textContent);
+
+      // восстановление UI состояния (не прибавляем БП при загрузке)
+      const stored = localStorage.getItem(`cb_${tIndex}_${rIndex}`);
+      if (stored === 'true') {
+        checkbox.checked = true;
+        row.classList.add('checked');
+      } else {
+        checkbox.checked = false;
+        row.classList.remove('checked');
+      }
+
+      function addPointsNow() {
+        const toAdd = getEffectiveToAdd(parsed.low, parsed.high);
+        totalBP += toAdd;
+        saveState();
+        updateProgress();
+      }
+
+      // клик по строке (если клик не по input) переключает чек
+      row.addEventListener('click', (e) => {
+        if (e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'input') {
+          // клик прямо по input — обработается в change
+          return;
+        }
+        // toggle checkbox state
+        checkbox.checked = !checkbox.checked;
+        // вручную вызвать change
+        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+
+      // при изменении checkbox — если стал checked, добавляем БП; если снят — просто снимаем визуал
+      checkbox.addEventListener('change', ()=>{
+        row.classList.toggle('checked', checkbox.checked);
+        localStorage.setItem(`cb_${tIndex}_${rIndex}`, checkbox.checked);
+        if (checkbox.checked) {
+          addPointsNow();
+        }
+        // снятие не отнимает BP
+      });
+
     });
   });
 
-  // reset checks (не трогает totalBP)
+  // Сброс галочек (не трогаем totalBP)
   RESET_BTN.addEventListener('click', ()=>{
-    tables.forEach((table, tIndex)=>{
+    tables.forEach((table, tIndex) => {
       const rows = Array.from(table.querySelectorAll('tbody tr'));
-      rows.forEach((row, rIndex)=>{
+      rows.forEach((row, rIndex) => {
         const checkbox = row.querySelector('input[type="checkbox"]');
         checkbox.checked = false;
         row.classList.remove('checked');
         localStorage.setItem(`cb_${tIndex}_${rIndex}`, false);
       });
     });
-    // totalBP remains
+    // totalBP остаётся прежним
     updateProgress();
   });
 
