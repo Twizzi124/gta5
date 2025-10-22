@@ -5,37 +5,38 @@
 <title>GTA 5 RP — Бонуспоинты</title>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
-  :root{
-    --bg:#121212;
-    --panel:#1e1e1e;
-    --accent:#ff9800;
-    --accent-dark:#ff5722;
-    --green:#2e7d32;
-    --muted:#222;
-    --text:#fff;
-  }
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);text-align:center}
-  h1{color:var(--accent);margin:18px 0}
-  .controls{width:900px;margin:0 auto 18px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
-  .controls label{color:var(--accent);font-size:16px;display:flex;align-items:center;gap:8px}
-  .controls input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
-  input#manualBP{width:120px;padding:6px 8px;background:var(--muted);border:2px solid var(--accent);border-radius:6px;color:#fff;text-align:center;font-size:16px}
-  table{width:900px;margin:18px auto;border-collapse:collapse;background:var(--panel);border:2px solid var(--accent);border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
-  th,td{padding:10px;border:1px solid rgba(255,255,255,0.04);text-align:left;vertical-align:middle}
-  th{background:var(--accent);color:#000;font-weight:700;text-align:center}
-  td.bp{text-align:center;color:var(--accent);font-weight:700;width:140px}
-  td.check{text-align:center;width:70px}
-  tr{cursor:pointer}
-  tr.checked{background:var(--green);color:#fff;transition:background .25s ease}
-  .total-bar{width:900px;margin:18px auto;padding:14px;background:#1c1c1c;border:2px solid var(--accent);border-radius:10px;font-size:18px;font-weight:700;color:var(--accent);box-shadow:0 6px 18px rgba(255,152,0,0.12)}
-  .reset-btn{padding:10px 18px;background:var(--accent-dark);border:none;color:#fff;border-radius:8px;cursor:pointer;font-size:15px}
-  .reset-btn:hover{background:#e64a19}
-  .bp-progress-container{width:900px;margin:18px auto;background:#222;border:2px solid var(--accent);border-radius:10px;height:36px;position:relative;overflow:hidden}
-  #bpProgressBar{height:100%;width:0;background:var(--accent);border-radius:8px;transition:width .5s ease}
-  .bp-progress-container span{position:absolute;width:100%;text-align:center;top:0;left:0;color:#fff;font-weight:700;line-height:36px}
-  @media (max-width:940px){
-    table,.controls,input#manualBP,.total-bar,.bp-progress-container{width:95%}
-  }
+:root{
+  --bg:#121212;
+  --panel:#1e1e1e;
+  --accent:#ff9800;
+  --accent-dark:#ff5722;
+  --green:#2e7d32;
+  --muted:#222;
+  --text:#fff;
+}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);text-align:center}
+h1{color:var(--accent);margin:18px 0;text-shadow:0 0 8px rgba(255,152,0,0.12)}
+.controls{width:900px;margin:0 auto 18px;display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+.controls label{color:var(--accent);font-size:16px;display:flex;align-items:center;gap:8px}
+.controls input[type="checkbox"]{width:18px;height:18px;cursor:pointer}
+input#manualBP{width:120px;padding:6px 8px;background:var(--muted);border:2px solid var(--accent);border-radius:6px;color:#fff;text-align:center;font-size:16px}
+table{width:900px;margin:18px auto;border-collapse:collapse;background:var(--panel);border:2px solid var(--accent);border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.6)}
+th,td{padding:10px;border:1px solid rgba(255,255,255,0.04);text-align:left;vertical-align:middle}
+th{background:var(--accent);color:#000;font-weight:700;text-align:center}
+td.bp{text-align:center;color:var(--accent);font-weight:700;width:140px}
+td.check{text-align:center;width:70px}
+tr{cursor:pointer}
+tr.checked{background:var(--green);color:#fff;transition:background .25s ease}
+tr:hover{background:#2a2a2a}
+.total-bar{width:900px;margin:18px auto;padding:14px;background:#1c1c1c;border:2px solid var(--accent);border-radius:10px;font-size:18px;font-weight:700;color:var(--accent);box-shadow:0 6px 18px rgba(255,152,0,0.12)}
+.reset-btn{padding:10px 18px;background:var(--accent-dark);border:none;color:#fff;border-radius:8px;cursor:pointer;font-size:15px}
+.reset-btn:hover{background:#e64a19}
+.bp-progress-container{width:900px;margin:18px auto;background:#222;border:2px solid var(--accent);border-radius:10px;height:36px;position:relative;overflow:hidden}
+#bpProgressBar{height:100%;width:0;background:var(--accent);border-radius:8px;transition:width .5s ease}
+.bp-progress-container span{position:absolute;width:100%;text-align:center;top:0;left:0;color:#fff;font-weight:700;line-height:36px}
+@media (max-width:940px){
+  table,.controls,input#manualBP,.total-bar,.bp-progress-container{width:95%}
+}
 </style>
 </head>
 <body>
@@ -47,7 +48,7 @@
     <label style="color:#fff">Общий BP: <input id="manualBP" type="number" min="0"></label>
   </div>
 
-  <!-- НОВОЕ -->
+  <!-- НОВОЕ (перед одиночными) -->
   <table id="new">
     <thead><tr><th>НОВОЕ</th><th>BP</th><th>✔</th></tr></thead>
     <tbody>
@@ -67,8 +68,12 @@
       <tr><td>Победить в армрестлинге</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Победить в дартс</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Забить 10 голов в волейболе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
-      <tr><td>Набрать 10 очков в настольном теннисе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
-      <tr><td>Набрать 10 очков в большом теннисе</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Поиграть 1 минуту в настольный теннис</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Поиграть 1 минуту в большой теннис</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Сыграть в мафию в казино</td><td class="bp">3/6</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Сделать платеж по лизингу</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Посадить траву в теплице</td><td class="bp">4/8</td><td class="check"><input type="checkbox"></td></tr>
+      <tr><td>Запустить переработку обезболивающих в лаборатории</td><td class="bp">4/8</td><td class="check"><input type="checkbox"></td></tr>
     </tbody>
   </table>
 
@@ -85,7 +90,6 @@
       <tr><td>Добавить 5 видео в Кинотеатр</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выкопать 1 сокровище (не мусор)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>5 раз снять 100% шкуру с животных</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
-      <!-- "Поймать золотую рыбку" удалено по просьбе -->
     </tbody>
   </table>
 
@@ -101,7 +105,6 @@
       <tr><td>10 действий на ферме</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>2 рейса на автобусе</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выполнить 15 заказов дальнобойщиком в порт</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
-      <!-- "Два раза оплатить смену внешности..." удалено по просьбе -->
     </tbody>
   </table>
 
@@ -114,8 +117,8 @@
       <tr><td>Победить 3 раза в Dance Battle</td><td class="bp">2/4</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выиграть 3 игры на Арене Maze Bank со ставкой от 100$</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
       <tr><td>Выиграть 5 игр в тренировочном комплексе со ставкой (от 100$)</td><td class="bp">1/2</td><td class="check"><input type="checkbox"></td></tr>
-
-    </tbody>
+    
+   </tbody>
   </table>
 
   <!-- Crime -->
@@ -157,7 +160,6 @@
 
 <script>
 (function(){
-  // элементы
   const vipEl = document.getElementById('vip');
   const x2El = document.getElementById('x2');
   const manualBP = document.getElementById('manualBP');
@@ -167,7 +169,7 @@
   const RESET_BTN = document.getElementById('resetChecks');
   const MAX_BP = 15000;
 
-  // состояние
+  // state
   let totalBP = parseInt(localStorage.getItem('totalBP')) || 0;
   totalBP = Math.max(0, totalBP);
   totalBPEl.textContent = totalBP;
@@ -176,7 +178,7 @@
   vipEl.checked = localStorage.getItem('vip') === 'true';
   x2El.checked = localStorage.getItem('x2') === 'true';
 
-  // helper: parse cell like "2/4" or "10/10" or "1/2"
+  // parse "low/high" like "2/4" or "10/20" or "10/10" or "1/2"
   function parseBPCell(text) {
     const parts = text.trim().split('/');
     const low = parseInt(parts[0]) || 0;
@@ -184,6 +186,10 @@
     return { low, high };
   }
 
+  // compute effective to add based on vip/x2:
+  // none => low
+  // vip xor x2 => high
+  // both => high * 2
   function getEffectiveToAdd(low, high) {
     const vip = vipEl.checked;
     const x2 = x2El.checked;
@@ -208,9 +214,9 @@
   }
   updateProgress();
 
-  // при смене VIP/x2 — просто сохраняем (вклад не пересчитываем автоматически, т.к. БП добавляются при клике)
-  vipEl.addEventListener('change', ()=> { localStorage.setItem('vip', vipEl.checked); });
-  x2El.addEventListener('change', ()=> { localStorage.setItem('x2', x2El.checked); });
+  // vip/x2 change saves only (we don't recalc past additions)
+  vipEl.addEventListener('change', ()=>{ localStorage.setItem('vip', vipEl.checked); });
+  x2El.addEventListener('change', ()=>{ localStorage.setItem('x2', x2El.checked); });
 
   manualBP.addEventListener('change', ()=>{
     let v = parseInt(manualBP.value) || 0;
@@ -219,7 +225,7 @@
     updateProgress();
   });
 
-  // навесим логику на все строки всех таблиц
+  // set up rows: clicking row toggles checkbox; when checkbox becomes checked -> add BP
   const tables = Array.from(document.querySelectorAll('table'));
   tables.forEach((table, tIndex) => {
     const rows = Array.from(table.querySelectorAll('tbody tr'));
@@ -228,7 +234,7 @@
       const bpCell = row.querySelector('.bp');
       const parsed = parseBPCell(bpCell.textContent);
 
-      // восстановление UI состояния (не прибавляем БП при загрузке)
+      // restore UI checked state (don't auto-add points on load)
       const stored = localStorage.getItem(`cb_${tIndex}_${rIndex}`);
       if (stored === 'true') {
         checkbox.checked = true;
@@ -238,39 +244,36 @@
         row.classList.remove('checked');
       }
 
-      function addPointsNow() {
+      function addNow() {
         const toAdd = getEffectiveToAdd(parsed.low, parsed.high);
         totalBP += toAdd;
         saveState();
         updateProgress();
       }
 
-      // клик по строке (если клик не по input) переключает чек
+      // clicking row toggles checkbox (unless clicking the checkbox itself)
       row.addEventListener('click', (e) => {
         if (e.target && e.target.tagName && e.target.tagName.toLowerCase() === 'input') {
-          // клик прямо по input — обработается в change
+          // clicked on checkbox -> change event will handle
           return;
         }
-        // toggle checkbox state
         checkbox.checked = !checkbox.checked;
-        // вручную вызвать change
+        // dispatch change event
         checkbox.dispatchEvent(new Event('change', { bubbles: true }));
       });
 
-      // при изменении checkbox — если стал checked, добавляем БП; если снят — просто снимаем визуал
-      checkbox.addEventListener('change', ()=>{
+      // checkbox change: if checked -> add BP; if unchecked -> only UI change (no subtraction)
+      checkbox.addEventListener('change', () => {
         row.classList.toggle('checked', checkbox.checked);
         localStorage.setItem(`cb_${tIndex}_${rIndex}`, checkbox.checked);
         if (checkbox.checked) {
-          addPointsNow();
+          addNow();
         }
-        // снятие не отнимает BP
       });
-
     });
   });
 
-  // Сброс галочек (не трогаем totalBP)
+  // reset checks (does NOT change totalBP)
   RESET_BTN.addEventListener('click', ()=>{
     tables.forEach((table, tIndex) => {
       const rows = Array.from(table.querySelectorAll('tbody tr'));
@@ -281,11 +284,10 @@
         localStorage.setItem(`cb_${tIndex}_${rIndex}`, false);
       });
     });
-    // totalBP остаётся прежним
     updateProgress();
   });
 
-  // сохранить при уходе
+  // save before unload
   window.addEventListener('beforeunload', saveState);
 
 })();
